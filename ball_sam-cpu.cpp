@@ -5,10 +5,12 @@
 
 using namespace std;
 
+//bins and samples
 const int n_bins = 100;
 const int n_points = 3000;
 
 int main(){
+    //random unif num generator
     default_random_engine eng;
     uniform_real_distribution<double> unif(-1.0, 1.0);
 
