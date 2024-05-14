@@ -1,44 +1,43 @@
 #include <iostream>
-#include <cmath>
-#include <random>
 #include <vector>
+#include <random>
+#include <cmath>
 
 using namespace std;
 
-float dist(const std::vector<float>& point) {
-    float sum = 0.0;
-    for(float coord : point){
-        sum += coord * coord;
-    }
-    return sqrt(sum);
-}
+const int n_bins = 100;
+const int n_points = 3000;
 
 int main(){
+    default_random_engine eng;
+    uniform_real_distribution<double> unif(-1.0, 1.0);
+
     for(int dim = 2; dim <= 16; dim++){
+        vector<int> hist(n_bins, 0);
 
-        unsigned long long sam_points = 1000000;
-        unsigned long long true_points = 0;
-        vector<unsigned int> hist(100, 0);
+        for(int i = 0; i < n_points; i++){
+            vector<double> points(dim);
+            double sum_squares = 0.0;
 
-        default_random_engine eng;
-        uniform_real_distribution<float> unif(-1, 1);
+            //point validation
+            do {
+                sum_squares = 0.0;
+                for(double& p : points){
+                    p = unif(eng);
+                    sum_squares += p * p;
+                    if(sum_squares > 1.0) //early break, helps with speed
+                        break;
+                }
+            } while(sum_squares > 1.0); //redo if invalid
 
-        for(unsigned long long i = 0; i < sam_points; i++){
-            vector<float> points(dim);
-            for(int j = 0; j < dim; j++){
-                points[j] = unif(eng);
-            }
-
-            float distance = dist(points);
-            int bin = static_cast<int>(distance*100);
-            if(bin < 100){
-                hist[bin]++;
-                true_points++;
-            }
+            double distance = sqrt(sum_squares);
+            int bin = min((int)(distance * n_bins), n_bins - 1);
+            hist[bin]++;
         }
+        //print results
         cout << "Dimension: " << dim << "\n";
-        for(int i = 0; i < 100; i++){
-            cout << static_cast<float>(hist[i]*100)/true_points << " ";
+        for(int i = 0; i < n_bins; i++){
+            cout << (double)(hist[i]) / n_points << " ";
         }
         cout << "\n\n";
     }

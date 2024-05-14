@@ -1,7 +1,7 @@
 all: ball_sam-cpu
 
 ball_sam-cpu: ball_sam-cpu.cpp
-	g++ ball_sam-cpu.cpp -o ball_sam-cpu
+	g++ -O3 -o ball_sam-cpu ball_sam-cpu.cpp
 
 clean:
 	rm ball_sam-cpu
