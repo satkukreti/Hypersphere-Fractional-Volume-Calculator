@@ -7,4 +7,4 @@ To run this code:
     It will automatically run ball_sam-cpu and run graph.py to plot the 3D Surface Plot.
 
 2) For cuda
-    I did not add to the makefile as it was tested on OpenHPC. Use OpenHPC to compile and run the code.
+    I did not add to the makefile as it was tested on OpenHPC. Use OpenHPC and nvcc to compile and run the code.
