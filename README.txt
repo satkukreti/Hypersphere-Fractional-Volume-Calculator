@@ -4,7 +4,7 @@ This is the final project for my High Performance Computing class. I executed th
 
 ## Simulation Goal
 
-This program estimates the function \( f_d(l) \), where \( f_d(l) \) is the fraction of the volume of a **D-dimensional** hypersphere (read: sphere whose dimensions are based on surface area, i.e., an ordinary sphere is a 2-sphere as the surface area is 2-dimensional) that is within distance \( l \) of the surface. The distance \( l \) is calculated from 0 to 1 in steps of 0.01.
+This program estimates the function `f_d(l)`, where `f_d(l)` is the fraction of the volume of a **D-dimensional** hypersphere (read: sphere whose dimensions are based on surface area, i.e., an ordinary sphere is a 2-sphere as the surface area is 2-dimensional) that is within distance `l` of the surface. The distance `l` is calculated from 0 to 1 in steps of 0.01.
 
 I used a random sampling of uniformly distributed points to simulate the sphere. Points outside the sphere were rejected by calculating the distance from the center, leaving the rest to approximate the fractional volume.
 
@@ -36,4 +36,3 @@ module add cuda/12.0
 which nvcc
 nvcc my_code.cu -o a.out
 srun -p gpu ./a.out
-```
