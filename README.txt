@@ -36,3 +36,4 @@ module add cuda/12.0
 which nvcc
 nvcc my_code.cu -o a.out
 srun -p gpu ./a.out
+```
